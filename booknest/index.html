@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BookNest — Discover Your Next Great Read</title>
+<meta name="description" content="BookNest is an independent online bookstore. Explore thousands of books across fiction, education, business, technology and more, at up to 45% off list price.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="banner" style="background:var(--color-text);color:#fff;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:9px 24px;display:flex;gap:24px;justify-content:space-between;flex-wrap:wrap">
+  <span>Free delivery on orders over <span id="freeShipLabel">₹499</span></span>
+  <span style="opacity:.7">Trusted by 40,000+ readers across India</span>
+</div>
+
+<header style="position:sticky;top:0;z-index:40;background:#fff;border-bottom:2px solid var(--color-divider)">
+  <div class="wrap" style="padding:14px 24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+    <a href="#home" id="logoLink" aria-label="BookNest — home" style="display:flex;align-items:center;text-decoration:none;flex:0 0 auto;line-height:0">
+      <img src="img/booknest-logo.png" alt="BookNest — your home for great books" class="brand-logo" style="width:auto;max-width:100%;display:block" />
+    </a>
+    <nav class="nav-links" style="align-items:center;gap:22px;flex-wrap:wrap">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#categories" class="nav-link">Categories</a>
+      <a href="#bestsellers" class="nav-link">Best Sellers</a>
+      <a href="#new" class="nav-link">New Arrivals</a>
+      <a href="#about" class="nav-link">About Us</a>
+      <a href="#reviews" class="nav-link">Reviews</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px;margin-left:auto">
+      <button class="btn btn-secondary" id="wishlistNavBtn" style="gap:8px" aria-label="Wishlist">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        <span id="wishCount">0</span>
+      </button>
+      <button class="btn btn-primary" id="openCartBtn" style="gap:8px;justify-content:flex-start">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        <span style="white-space:nowrap">Cart · <span id="cartCount">0</span></span>
+      </button>
+      <button class="btn btn-secondary btn-icon burger-btn" id="burgerBtn" aria-label="Menu" aria-expanded="false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path id="burgerPath" d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobileMenu" hidden style="border-top:1px solid var(--color-divider);padding:10px 24px 20px;background:#fff">
+    <div style="display:flex;align-items:center;border:2px solid var(--color-text);margin:8px 0 6px">
+      <input id="menuSearchInput" placeholder="Search books, authors or categories…" style="flex:1;border:0;outline:none;background:transparent;font:inherit;font-size:15px;padding:12px 14px;color:var(--color-text)" />
+      <button class="btn btn-primary" id="menuSearchBtn" style="margin:4px;justify-content:flex-start">Go</button>
+    </div>
+    <div style="display:grid">
+      <a href="#home" class="mobile-nav-link" style="color:var(--color-text);text-decoration:none;font-family:var(--font-heading);font-weight:800;font-size:17px;padding:15px 0;border-bottom:1px solid var(--color-divider)">Home</a>
+      <a href="#categories" class="mobile-nav-link" style="color:var(--color-text);text-decoration:none;font-family:var(--font-heading);font-weight:800;font-size:17px;padding:15px 0;border-bottom:1px solid var(--color-divider)">Categories</a>
+      <a href="#bestsellers" class="mobile-nav-link" style="color:var(--color-text);text-decoration:none;font-family:var(--font-heading);font-weight:800;font-size:17px;padding:15px 0;border-bottom:1px solid var(--color-divider)">Best Sellers</a>
+      <a href="#new" class="mobile-nav-link" style="color:var(--color-text);text-decoration:none;font-family:var(--font-heading);font-weight:800;font-size:17px;padding:15px 0;border-bottom:1px solid var(--color-divider)">New Arrivals</a>
+      <a href="#about" class="mobile-nav-link" style="color:var(--color-text);text-decoration:none;font-family:var(--font-heading);font-weight:800;font-size:17px;padding:15px 0;border-bottom:1px solid var(--color-divider)">About Us</a>
+      <a href="#reviews" class="mobile-nav-link" style="color:var(--color-text);text-decoration:none;font-family:var(--font-heading);font-weight:800;font-size:17px;padding:15px 0;border-bottom:1px solid var(--color-divider)">Reviews</a>
+      <a href="#contact" class="mobile-nav-link" style="color:var(--color-text);text-decoration:none;font-family:var(--font-heading);font-weight:800;font-size:17px;padding:15px 0;border-bottom:1px solid var(--color-divider)">Contact</a>
+    </div>
+  </div>
+</header>
+
+<main id="storeView">
+  <section id="home" class="wrap" style="padding:0 24px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:0;border-bottom:2px solid var(--color-divider)">
+      <div style="padding:clamp(44px,6vw,80px) clamp(0px,4vw,48px) clamp(44px,6vw,80px) 0;min-width:0;display:flex;flex-direction:column;justify-content:center;border-right:2px solid var(--color-divider)">
+        <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700);margin-bottom:20px">Est. 2014 · Independent Booksellers</div>
+        <h1 style="font-size:clamp(38px,5vw,64px);line-height:1;letter-spacing:-.035em;margin:0 0 20px;max-width:14ch;text-wrap:balance">Discover Your Next Great Read</h1>
+        <p style="font-size:18px;line-height:1.5;max-width:52ch;color:var(--color-neutral-800);margin:0 0 28px;text-wrap:pretty">Explore thousands of books across fiction, education, business, technology and more.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px">
+          <a class="btn btn-primary" href="#bestsellers" style="font-size:15px;padding:14px 22px;justify-content:flex-start;white-space:nowrap">Shop Books</a>
+          <a class="btn btn-secondary" href="#categories" style="font-size:15px;padding:14px 22px;justify-content:flex-start;white-space:nowrap">Explore Categories</a>
+        </div>
+        <div style="display:flex;align-items:center;border:2px solid var(--color-text);background:#fff;max-width:620px">
+          <span style="padding:0 12px 0 14px;display:flex;color:var(--color-neutral-700)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </span>
+          <input id="heroSearchInput" placeholder="Search books, authors or categories…" style="flex:1;border:0;outline:none;background:transparent;font:inherit;font-size:15px;padding:14px 0;color:var(--color-text)" />
+          <button class="btn btn-primary" id="heroSearchBtn" style="margin:4px;justify-content:flex-start">Search</button>
+        </div>
+      </div>
+      <div class="hero-img-wrap" style="position:relative;min-height:min(72vh,620px);overflow:hidden;background:#201e1d">
+        <img src="img/hero-bookstore.jpg" alt="Warm bookstore shelf wall filled with books" class="hero-img" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.2,.8,.2,1)" />
+        <div style="position:absolute;left:0;bottom:0;background:#fff;padding:18px 22px;max-width:300px">
+          <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-700);margin-bottom:6px">The shelf wall · Fort, Mumbai</div>
+          <div style="font-family:var(--font-heading);font-weight:800;font-size:17px;line-height:1.2">Twelve thousand titles, chosen by hand.</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));border-bottom:2px solid var(--color-divider)">
+      <div style="padding:22px 20px;border-right:1px solid var(--color-divider)"><div style="font-family:var(--font-heading);font-weight:800;font-size:26px">12,400+</div><div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-700)">Titles in stock</div></div>
+      <div style="padding:22px 20px;border-right:1px solid var(--color-divider)"><div style="font-family:var(--font-heading);font-weight:800;font-size:26px">48 hrs</div><div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-700)">Metro delivery</div></div>
+      <div style="padding:22px 20px;border-right:1px solid var(--color-divider)"><div style="font-family:var(--font-heading);font-weight:800;font-size:26px">4.8 / 5</div><div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-700)">9,120 reviews</div></div>
+      <div style="padding:22px 20px"><div style="font-family:var(--font-heading);font-weight:800;font-size:26px">Up to 45%</div><div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-700)">Off list price</div></div>
+    </div>
+  </section>
+
+  <section id="categories" class="wrap" style="padding:clamp(56px,7vw,92px) 24px 0">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:28px">
+      <div>
+        <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700);margin-bottom:10px">Browse the shelves</div>
+        <h2 style="font-size:40px;letter-spacing:-.03em;margin:0">Categories</h2>
+      </div>
+      <p style="margin:0;max-width:38ch;font-size:14px;color:var(--color-neutral-800)">Eight shelves, curated weekly by our booksellers. Pick one to filter the catalogue.</p>
+    </div>
+    <div id="categoriesGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));border-top:2px solid var(--color-divider);border-left:1px solid var(--color-divider)"></div>
+  </section>
+
+  <section id="results" class="wrap" hidden style="padding:56px 24px 0">
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;border-bottom:2px solid var(--color-divider);padding-bottom:18px;margin-bottom:28px">
+      <h2 id="resultsTitle" style="font-size:30px;margin:0;letter-spacing:-.03em">All Books</h2>
+      <span class="tag tag-accent"><span id="resultsCount">0</span> results</span>
+      <button class="btn btn-secondary" id="clearFiltersBtn" style="margin-left:auto;justify-content:flex-start">Clear filters</button>
+    </div>
+    <div id="resultsGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:28px"></div>
+  </section>
+
+  <section id="bestsellers" class="wrap" style="padding:clamp(56px,7vw,92px) 24px 0">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-bottom:36px">
+      <div>
+        <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent);font-weight:700;margin-bottom:12px">Best Sellers</div>
+        <h2 style="font-size:clamp(34px,4.6vw,54px);letter-spacing:-.035em;margin:0 0 14px">Our Best Sellers</h2>
+        <p style="margin:0;font-size:16px;line-height:1.5;color:var(--color-neutral-800);max-width:46ch">Handpicked favourites from our readers. Explore the books everyone is talking about.</p>
+      </div>
+      <button class="btn btn-secondary view-all-btn" id="viewAllBtn" style="font-size:15px;padding:15px 20px;gap:12px;justify-content:flex-start;white-space:nowrap">
+        View All Books
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+    <div id="bestSellersGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:24px"></div>
+    <div style="margin-top:36px;border:1px solid var(--color-neutral-300);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))">
+      <div style="display:flex;align-items:center;gap:14px;padding:22px 24px;border-right:1px solid var(--color-neutral-300)">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.8"><path d="M14 17V4H2v13h12Zm0-9h5l3 4v5h-8"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg>
+        <div><div style="font-family:var(--font-heading);font-weight:800;font-size:15px">Free Delivery</div><div style="font-size:13px;color:var(--color-neutral-700)">On orders over ₹499</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;padding:22px 24px;border-right:1px solid var(--color-neutral-300)">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+        <div><div style="font-family:var(--font-heading);font-weight:800;font-size:15px">100% Original</div><div style="font-size:13px;color:var(--color-neutral-700)">Genuine books only</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;padding:22px 24px;border-right:1px solid var(--color-neutral-300)">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.8"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
+        <div><div style="font-family:var(--font-heading);font-weight:800;font-size:15px">Easy Returns</div><div style="font-size:13px;color:var(--color-neutral-700)">Seven days, hassle-free</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;padding:22px 24px">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.8"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3"/></svg>
+        <div><div style="font-family:var(--font-heading);font-weight:800;font-size:15px">Support 24/7</div><div style="font-size:13px;color:var(--color-neutral-700)">We're here to help</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="new" class="wrap" style="padding:clamp(56px,7vw,92px) 24px 0">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;border-bottom:2px solid var(--color-divider);padding-bottom:18px;margin-bottom:32px">
+      <div>
+        <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700);margin-bottom:10px">Just landed</div>
+        <h2 style="font-size:40px;letter-spacing:-.03em;margin:0">New Arrivals</h2>
+      </div>
+      <span style="font-size:13px;color:var(--color-neutral-700)">Shipped from our Mumbai warehouse within 24 hours</span>
+    </div>
+    <div id="newArrivalsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:0;border-top:1px solid var(--color-divider)"></div>
+  </section>
+
+  <section id="about" class="wrap" style="margin:clamp(56px,7vw,92px) auto 0;padding:0 24px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider)">
+      <div style="position:relative;min-height:440px;overflow:hidden;border-right:2px solid var(--color-divider);background:#cbbca6">
+        <img src="img/about-books.jpg" alt="Stacks of books on a reading table" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+      </div>
+      <div style="padding:56px 24px 56px 48px">
+        <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700);margin-bottom:14px">About Us</div>
+        <h2 style="font-size:36px;letter-spacing:-.03em;margin:0 0 18px;max-width:24ch">A bookshop built around the reader, not the algorithm</h2>
+        <p style="font-size:16px;line-height:1.6;color:var(--color-neutral-800);max-width:62ch;text-wrap:pretty">BookNest exists to make finding the right book effortless and buying it affordable. We began as a single shop in Fort, Mumbai and now ship more than twelve thousand titles across India — fiction, academic sets, business and technology, self-help, children's books, biography and complete competitive-exam libraries.</p>
+        <p style="font-size:16px;line-height:1.6;color:var(--color-neutral-800);max-width:62ch;text-wrap:pretty">Every title is hand-checked before dispatch, priced up to 45% below list, and backed by a seven-day replacement promise. Our booksellers answer every question personally — no chatbots, no upsell.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--color-divider);margin-top:28px">
+          <div style="padding:18px 18px 0 0;border-right:1px solid var(--color-divider)"><div style="font-family:var(--font-heading);font-weight:800;font-size:15px;margin-bottom:4px">Genuine editions</div><div style="font-size:13px;color:var(--color-neutral-700)">Sourced direct from publishers.</div></div>
+          <div style="padding:18px"><div style="font-family:var(--font-heading);font-weight:800;font-size:15px;margin-bottom:4px">Fair pricing</div><div style="font-size:13px;color:var(--color-neutral-700)">Discounts on every shelf, always.</div></div>
+          <div style="padding:18px 0 0 18px;border-left:1px solid var(--color-divider)"><div style="font-family:var(--font-heading);font-weight:800;font-size:15px;margin-bottom:4px">Easy returns</div><div style="font-size:13px;color:var(--color-neutral-700)">Seven days, no questions asked.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="wrap" style="padding:clamp(56px,7vw,92px) 24px 0">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;border-bottom:2px solid var(--color-divider);padding-bottom:18px;margin-bottom:32px">
+      <div>
+        <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700);margin-bottom:10px">4.8 average from 9,120 orders</div>
+        <h2 style="font-size:40px;letter-spacing:-.03em;margin:0">Customer Reviews</h2>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:0;border-top:1px solid var(--color-divider);border-left:1px solid var(--color-divider)">
+      <div style="padding:28px;border-right:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider);display:flex;flex-direction:column;gap:14px">
+        <div style="color:var(--color-accent);letter-spacing:2px;font-size:14px">★★★★★</div>
+        <p style="font-size:16px;line-height:1.55;margin:0;flex:1;text-wrap:pretty">Four years of ordering and not one damaged spine. The exam sets arrived a week before my daughter's coaching started, and the packaging is genuinely careful.</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:12px;border-top:1px solid var(--color-divider)">
+          <span style="width:36px;height:36px;background:var(--color-text);color:#fff;display:grid;place-items:center;font-family:var(--font-heading);font-weight:800;font-size:14px">AR</span>
+          <div><div style="font-family:var(--font-heading);font-weight:800;font-size:14px">Ananya Rao</div><div style="font-size:12px;color:var(--color-neutral-700)">Pune · 31 orders</div></div>
+        </div>
+      </div>
+      <div style="padding:28px;border-right:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider);display:flex;flex-direction:column;gap:14px">
+        <div style="color:var(--color-accent);letter-spacing:2px;font-size:14px">★★★★★</div>
+        <p style="font-size:16px;line-height:1.55;margin:0;flex:1;text-wrap:pretty">I asked for a technology title that was out of print. A bookseller called me back the same day, found a copy, and held it until I confirmed. That is service.</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:12px;border-top:1px solid var(--color-divider)">
+          <span style="width:36px;height:36px;background:var(--color-text);color:#fff;display:grid;place-items:center;font-family:var(--font-heading);font-weight:800;font-size:14px">VI</span>
+          <div><div style="font-family:var(--font-heading);font-weight:800;font-size:14px">Vikram Iyer</div><div style="font-size:12px;color:var(--color-neutral-700)">Bengaluru · 12 orders</div></div>
+        </div>
+      </div>
+      <div style="padding:28px;border-right:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider);display:flex;flex-direction:column;gap:14px">
+        <div style="color:var(--color-accent);letter-spacing:2px;font-size:14px">★★★★☆</div>
+        <p style="font-size:16px;line-height:1.55;margin:0;flex:1;text-wrap:pretty">Prices beat everyone I compare against and the Friday letter has become how I choose what to read. Delivery to Kerala takes three days, never more.</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:12px;border-top:1px solid var(--color-divider)">
+          <span style="width:36px;height:36px;background:var(--color-text);color:#fff;display:grid;place-items:center;font-family:var(--font-heading);font-weight:800;font-size:14px">SN</span>
+          <div><div style="font-family:var(--font-heading);font-weight:800;font-size:14px">Shreya Nambiar</div><div style="font-size:12px;color:var(--color-neutral-700)">Kochi · 47 orders</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="wrap" style="margin:clamp(56px,7vw,92px) auto 0;padding:0 24px">
+    <div style="border-top:2px solid var(--color-divider);padding-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:56px">
+      <div>
+        <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700);margin-bottom:12px">Contact Us</div>
+        <h2 style="font-size:36px;letter-spacing:-.03em;margin:0 0 24px">Talk to a bookseller</h2>
+        <div style="display:grid;gap:0;border-top:1px solid var(--color-divider)">
+          <div style="display:grid;grid-template-columns:110px 1fr;padding:14px 0;border-bottom:1px solid var(--color-divider);font-size:15px"><span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-700)">Phone</span><a href="tel:+919876543210" style="color:var(--color-text);text-decoration:none">+91 98765 43210</a></div>
+          <div style="display:grid;grid-template-columns:110px 1fr;padding:14px 0;border-bottom:1px solid var(--color-divider);font-size:15px"><span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-700)">Email</span><a href="mailto:hello@booknest.in" style="color:var(--color-text);text-decoration:none">hello@booknest.in</a></div>
+          <div style="display:grid;grid-template-columns:110px 1fr;padding:14px 0;border-bottom:1px solid var(--color-divider);font-size:15px"><span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-700)">Store</span><span>24 Ashoka Lane, Fort<br />Mumbai 400001 · Mon–Sat, 10–8</span></div>
+        </div>
+        <a class="btn btn-primary" href="https://wa.me/919876543210" target="_blank" rel="noreferrer" style="margin-top:20px;font-size:15px;padding:14px 20px;justify-content:flex-start;gap:10px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8A8.5 8.5 0 0 1 12.5 20a8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 8.7 3.9a8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>
+          Chat on WhatsApp
+        </a>
+        <div style="margin-top:32px;position:relative;height:260px;border:2px solid var(--color-divider)">
+          <img src="img/map-fort-mumbai.jpg" alt="Map showing BookNest at 24 Ashoka Lane, Fort, Mumbai" style="width:100%;height:100%;object-fit:cover" />
+          <div style="position:absolute;left:0;bottom:0;background:var(--color-text);color:#fff;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;pointer-events:none">Find us · Fort, Mumbai</div>
+        </div>
+      </div>
+      <div style="background:var(--color-neutral-100);padding:36px">
+        <h3 style="font-size:22px;margin:0 0 6px">Send a message</h3>
+        <p style="font-size:14px;color:var(--color-neutral-700);margin:0 0 22px" id="contactStatus">We reply within one working day.</p>
+        <form id="contactForm" style="display:grid;gap:16px">
+          <div class="field-row-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div class="field"><label>Full name</label><input class="input" required style="background:#fff" placeholder="Ananya Rao" /></div>
+            <div class="field"><label>Phone</label><input class="input" style="background:#fff" placeholder="+91 …" /></div>
+          </div>
+          <div class="field"><label>Email</label><input class="input" type="email" required style="background:#fff" placeholder="you@email.com" /></div>
+          <div class="field"><label>What can we help with?</label><input class="input" style="background:#fff" placeholder="Order, availability, bulk purchase…" /></div>
+          <div class="field"><label>Message</label><textarea class="input" style="background:#fff;min-height:120px" placeholder="Tell us what you're looking for."></textarea></div>
+          <button type="submit" class="btn btn-primary" style="justify-content:flex-start;font-size:15px;padding:13px 20px">Send message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:72px;background:var(--color-accent);color:#fff;padding:64px 24px">
+    <div class="wrap" style="padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px;align-items:end">
+      <h2 style="font-size:clamp(34px,4.4vw,52px);line-height:1.02;letter-spacing:-.035em;margin:0;max-width:22ch;color:#fff">Ten thousand shelves. One reader at a time.</h2>
+      <div>
+        <p style="font-size:16px;margin:0 0 18px;color:#fff;opacity:.9">Join the BookNest letter — one email each Friday with three books worth your weekend.</p>
+        <form id="newsletterForm" style="display:flex;gap:0;border:2px solid #fff;background:transparent">
+          <input type="email" required placeholder="you@email.com" style="flex:1;border:0;outline:none;background:transparent;font:inherit;font-size:15px;padding:13px 14px;color:#fff" />
+          <button type="submit" class="btn" style="background:#fff;color:var(--color-accent);border:0;justify-content:flex-start;padding:0 20px">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="checkoutView" class="wrap" hidden style="padding:48px 24px 80px">
+  <button class="btn btn-ghost" id="checkoutBackBtn" style="justify-content:flex-start;margin-bottom:20px">← Continue shopping</button>
+  <h1 style="font-size:44px;letter-spacing:-.035em;margin:0 0 8px">Checkout</h1>
+  <p style="font-size:15px;color:var(--color-neutral-700);margin:0 0 32px">Step 2 of 2 — delivery details and payment.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px;align-items:start">
+    <form id="checkoutForm">
+      <h3 style="font-size:20px;margin:0 0 18px;padding-bottom:12px;border-bottom:2px solid var(--color-divider)">Customer details</h3>
+      <div style="display:grid;gap:16px">
+        <div class="field-row-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="field"><label>Full name</label><input class="input" name="name" required style="background:#fff" placeholder="Ananya Rao" /></div>
+          <div class="field"><label>Phone</label><input class="input" name="phone" required style="background:#fff" placeholder="+91 98765 43210" /></div>
+        </div>
+        <div class="field"><label>Email</label><input class="input" name="email" type="email" required style="background:#fff" placeholder="you@email.com" /></div>
+        <div class="field"><label>Delivery address</label><textarea class="input" name="address" required style="background:#fff" placeholder="Flat, street, landmark"></textarea></div>
+        <div class="field-row-3" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+          <div class="field"><label>City</label><input class="input" name="city" required style="background:#fff" placeholder="Mumbai" /></div>
+          <div class="field"><label>State</label><input class="input" name="state" required style="background:#fff" placeholder="Maharashtra" /></div>
+          <div class="field"><label>PIN code</label><input class="input" name="pin" required style="background:#fff" placeholder="400001" /></div>
+        </div>
+        <h3 style="font-size:20px;margin:20px 0 6px;padding-bottom:12px;border-bottom:2px solid var(--color-divider)">Payment</h3>
+        <div style="display:flex;gap:24px;flex-wrap:wrap;padding-top:6px">
+          <label class="radio"><input type="radio" name="pay" value="UPI" checked /><span class="dot"></span>UPI</label>
+          <label class="radio"><input type="radio" name="pay" value="Card" /><span class="dot"></span>Card</label>
+          <label class="radio"><input type="radio" name="pay" value="COD" /><span class="dot"></span>Cash on delivery</label>
+        </div>
+      </div>
+      <div style="background:var(--color-neutral-100);padding:28px;margin-top:32px;position:sticky;top:110px" class="checkout-summary-mobile">
+        <h3 style="font-size:20px;margin:0 0 16px;padding-bottom:12px;border-bottom:2px solid var(--color-divider)">Order summary</h3>
+        <div id="checkoutItems"></div>
+        <div style="display:flex;justify-content:space-between;font-size:14px;padding:14px 0 6px"><span>Subtotal</span><span id="checkoutSubtotal">₹0</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:14px;padding:6px 0"><span>Delivery</span><span id="checkoutShipping">Free</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:14px;padding:6px 0;color:var(--color-accent-700)"><span>Savings</span><span>−<span id="checkoutSavings">₹0</span></span></div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:14px 0 0;margin-top:10px;border-top:2px solid var(--color-divider)"><span style="font-family:var(--font-heading);font-weight:800;font-size:16px">Total</span><span style="font-family:var(--font-heading);font-weight:800;font-size:24px" id="checkoutTotal">₹0</span></div>
+        <button type="submit" class="btn btn-primary btn-block" style="font-size:15px;padding:14px 20px;margin-top:18px">Place order</button>
+        <p style="font-size:12px;color:var(--color-neutral-700);margin:12px 0 0">Secure payment · 7-day replacement · GST invoice included.</p>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="doneView" class="wrap" hidden style="max-width:820px;padding:96px 24px 120px">
+  <div style="width:56px;height:56px;background:var(--color-accent);color:#fff;display:grid;place-items:center;margin-bottom:24px">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+  </div>
+  <h1 style="font-size:44px;letter-spacing:-.035em;margin:0 0 12px">Order confirmed</h1>
+  <p style="font-size:17px;color:var(--color-neutral-800);max-width:56ch">Thank you, <span id="orderName">reader</span>. Order <span id="orderId"></span> is packed within the hour and arrives in two to four working days. A GST invoice is on its way to your inbox.</p>
+  <button class="btn btn-secondary" id="doneBackBtn" style="justify-content:flex-start;margin-top:20px;font-size:15px;padding:13px 20px">Back to the shop</button>
+</div>
+
+<footer style="background:var(--color-text);color:#fff;padding:64px 24px 28px;margin-top:0">
+  <div class="wrap" style="padding:0">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.25)">
+      <div>
+        <a href="#home" aria-label="BookNest — home" style="display:inline-flex;background:#fff;padding:12px 16px;margin-bottom:16px;line-height:0"><img src="img/booknest-logo.png" alt="BookNest — your home for great books" style="height:38px;width:auto;display:block" /></a>
+        <p style="font-size:14px;line-height:1.6;opacity:.75;max-width:44ch">An independent online bookstore helping readers across India find the right book — and buy it at a fair price. Twelve thousand titles, hand-checked and shipped from Mumbai.</p>
+        <div style="display:flex;gap:10px;margin-top:18px">
+          <a href="#home" aria-label="Instagram" class="social-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="0"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
+          <a href="#home" aria-label="Facebook" class="social-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3Z"/></svg></a>
+          <a href="#home" aria-label="X" class="social-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l16 16M20 4L4 20"/></svg></a>
+          <a href="#home" aria-label="YouTube" class="social-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 8.5a3 3 0 0 1 3-3h13a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-13a3 3 0 0 1-3-3Z"/><path d="M10 9.5l5 2.5-5 2.5Z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.6;margin-bottom:14px">Quick Links</div>
+        <div style="display:grid;gap:9px;font-size:14px">
+          <a href="#home" style="color:#fff;text-decoration:none;opacity:.85">Home</a>
+          <a href="#bestsellers" style="color:#fff;text-decoration:none;opacity:.85">Best Sellers</a>
+          <a href="#new" style="color:#fff;text-decoration:none;opacity:.85">New Arrivals</a>
+          <a href="#about" style="color:#fff;text-decoration:none;opacity:.85">About Us</a>
+          <a href="#reviews" style="color:#fff;text-decoration:none;opacity:.85">Customer Reviews</a>
+          <a href="#contact" style="color:#fff;text-decoration:none;opacity:.85">Contact Us</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.6;margin-bottom:14px">Categories</div>
+        <div id="footerCategories" style="display:grid;gap:9px;font-size:14px"></div>
+      </div>
+      <div>
+        <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.6;margin-bottom:14px">Customer Support</div>
+        <div style="display:grid;gap:9px;font-size:14px">
+          <a href="#contact" style="color:#fff;text-decoration:none;opacity:.85">Track your order</a>
+          <a href="#contact" style="color:#fff;text-decoration:none;opacity:.85">Shipping &amp; delivery</a>
+          <a href="#contact" style="color:#fff;text-decoration:none;opacity:.85">Returns &amp; replacement</a>
+          <a href="#contact" style="color:#fff;text-decoration:none;opacity:.85">Bulk &amp; institutional orders</a>
+          <a href="tel:+919876543210" style="color:#fff;text-decoration:none;opacity:.85">+91 98765 43210</a>
+          <a href="mailto:hello@booknest.in" style="color:#fff;text-decoration:none;opacity:.85">hello@booknest.in</a>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:20px;font-size:12px;opacity:.6">
+      <span>© 2026 BookNest Booksellers Pvt. Ltd. All rights reserved.</span>
+      <span>Privacy Policy · Terms of Use · GSTIN 27AABCB1234K1ZV</span>
+    </div>
+  </div>
+</footer>
+
+<div id="cartScrim" style="position:fixed;inset:0;background:rgba(32,30,29,.5);z-index:60;transition:opacity .3s ease;opacity:0;pointer-events:none"></div>
+<aside id="cartDrawer" style="position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:#fff;z-index:61;box-shadow:var(--shadow-lg);display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.2,.8,.2,1);transform:translateX(105%)">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:20px;border-bottom:2px solid var(--color-divider)">
+    <h3 style="margin:0;font-size:20px">Your cart · <span id="drawerCartCount">0</span></h3>
+    <button class="btn btn-secondary btn-icon" id="closeCartBtn" aria-label="Close cart">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:8px 20px">
+    <div id="cartEmptyMsg" style="padding:48px 0;text-align:left">
+      <p style="font-size:15px;color:var(--color-neutral-700)">Your cart is empty. Add a book from the Best Sellers shelf to get started.</p>
+      <button class="btn btn-secondary" id="browseBooksBtn" style="justify-content:flex-start">Browse books</button>
+    </div>
+    <div id="cartItemsList"></div>
+    <div id="wishlistSection" hidden style="padding:20px 0">
+      <div style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);margin-bottom:12px">Wishlist · <span id="wishlistSectionCount">0</span></div>
+      <div id="wishItemsList"></div>
+    </div>
+  </div>
+  <div style="padding:20px;border-top:2px solid var(--color-divider)">
+    <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px"><span>Subtotal</span><span id="drawerSubtotal">₹0</span></div>
+    <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:10px"><span>Delivery</span><span id="drawerShipping">Free</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;padding-top:12px;border-top:2px solid var(--color-divider)"><span style="font-family:var(--font-heading);font-weight:800;font-size:16px">Total</span><span style="font-family:var(--font-heading);font-weight:800;font-size:22px" id="drawerTotal">₹0</span></div>
+    <button class="btn btn-primary btn-block" id="goCheckoutBtn" style="font-size:15px;padding:14px 20px">Checkout</button>
+  </div>
+</aside>
+
+<script src="app.js"></script>
+</body>
+</html>
