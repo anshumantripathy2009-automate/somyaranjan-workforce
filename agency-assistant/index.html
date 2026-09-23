@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NoirFlow — Agency Assistant</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-mark">N</span>
+        <div class="brand-text">
+          <span class="brand-name">NoirFlow</span>
+          <span class="brand-sub">Agency Assistant</span>
+        </div>
+      </div>
+      <button id="openAddLead" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Add Lead
+      </button>
+    </div>
+  </header>
+
+  <main class="app-main">
+
+    <!-- Dashboard Stats -->
+    <section class="stats-grid" id="statsGrid">
+      <div class="stat-card">
+        <span class="stat-label">Total Leads</span>
+        <span class="stat-value" id="statTotal">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">New</span>
+        <span class="stat-value" id="statNew">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Contacted</span>
+        <span class="stat-value" id="statContacted">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Interested</span>
+        <span class="stat-value" id="statInterested">0</span>
+      </div>
+      <div class="stat-card accent-card">
+        <span class="stat-label">Converted</span>
+        <span class="stat-value" id="statConverted">0</span>
+      </div>
+    </section>
+
+    <!-- Leads Table -->
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Recent Leads</h2>
+        <div class="filter-row" id="filterRow">
+          <button class="chip active" data-filter="All">All</button>
+          <button class="chip" data-filter="New">New</button>
+          <button class="chip" data-filter="Analyzed">Analyzed</button>
+          <button class="chip" data-filter="Contacted">Contacted</button>
+          <button class="chip" data-filter="Follow-up">Follow-up</button>
+          <button class="chip" data-filter="Interested">Interested</button>
+          <button class="chip" data-filter="Converted">Converted</button>
+          <button class="chip" data-filter="Not Interested">Not Interested</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="leads-table" id="leadsTable">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Industry</th>
+              <th>Contact</th>
+              <th>Status</th>
+              <th>Added</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="leadsTableBody"></tbody>
+        </table>
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <p>No leads yet</p>
+          <span>Add your first lead to get an AI-generated analysis and outreach.</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Add Lead Modal -->
+  <div class="modal-overlay" id="addLeadOverlay">
+    <div class="modal modal-form">
+      <div class="modal-header">
+        <h3>New Lead</h3>
+        <button class="icon-btn" id="closeAddLead" aria-label="Close">✕</button>
+      </div>
+      <form id="leadForm" class="lead-form">
+        <div class="field">
+          <label for="companyName">Company / Business Name *</label>
+          <input type="text" id="companyName" required placeholder="e.g. Bright Path Dental" />
+        </div>
+        <div class="field">
+          <label for="website">Website URL</label>
+          <input type="text" id="website" placeholder="e.g. brightpathdental.com" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="industry">Industry</label>
+            <input type="text" id="industry" placeholder="e.g. Healthcare, Real Estate, E-commerce" />
+          </div>
+          <div class="field">
+            <label for="contactRole">Contact Role</label>
+            <input type="text" id="contactRole" placeholder="e.g. Owner, Marketing Manager" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="contactPerson">Contact Person</label>
+          <input type="text" id="contactPerson" placeholder="e.g. Sarah Malhotra" />
+        </div>
+        <div class="field">
+          <label for="mainProblem">Main Problem / Requirement</label>
+          <textarea id="mainProblem" rows="3" placeholder="What are they struggling with? e.g. Missing 30% of inbound calls, manual appointment booking"></textarea>
+        </div>
+        <div class="field">
+          <label for="notes">Notes</label>
+          <textarea id="notes" rows="2" placeholder="Any extra context..."></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="cancelAddLead">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Lead</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Lead Detail Modal -->
+  <div class="modal-overlay" id="detailOverlay">
+    <div class="modal modal-detail">
+      <div class="modal-header">
+        <div>
+          <h3 id="detailCompanyName">Company</h3>
+          <span id="detailIndustry" class="detail-subtitle"></span>
+        </div>
+        <button class="icon-btn" id="closeDetail" aria-label="Close">✕</button>
+      </div>
+
+      <div class="detail-body" id="detailBody">
+
+        <div class="detail-top-row">
+          <div class="lead-meta">
+            <div class="meta-item"><span>Website</span><strong id="metaWebsite">—</strong></div>
+            <div class="meta-item"><span>Contact</span><strong id="metaContact">—</strong></div>
+            <div class="meta-item"><span>Role</span><strong id="metaRole">—</strong></div>
+          </div>
+          <div class="status-control">
+            <label for="statusSelect">Status</label>
+            <select id="statusSelect">
+              <option>New</option>
+              <option>Analyzed</option>
+              <option>Contacted</option>
+              <option>Follow-up</option>
+              <option>Interested</option>
+              <option>Converted</option>
+              <option>Not Interested</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="detail-block" id="problemBlock">
+          <h4>Main Problem / Requirement</h4>
+          <p id="metaProblem" class="muted-text">—</p>
+        </div>
+
+        <div class="detail-block" id="notesBlock">
+          <h4>Notes</h4>
+          <p id="metaNotes" class="muted-text">—</p>
+        </div>
+
+        <!-- Analysis section -->
+        <div class="analysis-section">
+          <div class="analysis-header">
+            <h4>AI Lead Analysis</h4>
+            <button class="btn btn-primary btn-sm" id="analyzeBtn">
+              <span class="btn-label">Analyze Lead</span>
+            </button>
+          </div>
+
+          <div class="analysis-empty" id="analysisEmpty">
+            <span>No analysis yet. Click "Analyze Lead" to generate insights.</span>
+          </div>
+
+          <div class="analysis-loading hidden" id="analysisLoading">
+            <div class="spinner"></div>
+            <span>Analyzing business context...</span>
+          </div>
+
+          <div class="analysis-content hidden" id="analysisContent">
+            <div class="a-block">
+              <h5>Business Summary</h5>
+              <p id="aSummary"></p>
+            </div>
+            <div class="a-grid">
+              <div class="a-block">
+                <h5>Possible Business Problems</h5>
+                <ul id="aProblems"></ul>
+              </div>
+              <div class="a-block">
+                <h5>Automation Opportunities</h5>
+                <ul id="aAutomation"></ul>
+              </div>
+              <div class="a-block">
+                <h5>AI Opportunities</h5>
+                <ul id="aAI"></ul>
+              </div>
+              <div class="a-block">
+                <h5>Recommended Solution</h5>
+                <p id="aSolution"></p>
+              </div>
+            </div>
+            <div class="a-footer">
+              <div class="a-pill">
+                <span>Estimated Value</span>
+                <strong id="aValue"></strong>
+              </div>
+              <div class="a-pill next-step">
+                <span>Suggested Next Step</span>
+                <strong id="aNextStep"></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Outreach section -->
+        <div class="outreach-section" id="outreachSection">
+          <h4>Personalized Outreach</h4>
+          <div class="outreach-actions">
+            <button class="btn btn-secondary" id="generateEmailBtn" disabled>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6"/></svg>
+              Generate Email
+            </button>
+            <button class="btn btn-secondary" id="generateDMBtn" disabled>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="currentColor" stroke-width="1.6"/></svg>
+              Generate LinkedIn DM
+            </button>
+          </div>
+          <span class="outreach-hint" id="outreachHint">Run analysis first to unlock personalized outreach.</span>
+
+          <div class="outreach-output hidden" id="emailOutput">
+            <div class="output-header">
+              <span>Email Draft</span>
+              <button class="copy-btn" data-copy-target="emailBody">Copy</button>
+            </div>
+            <div class="output-field"><span>Subject</span><p id="emailSubject"></p></div>
+            <div class="output-field"><span>Body</span><p id="emailBody"></p></div>
+          </div>
+
+          <div class="outreach-output hidden" id="dmOutput">
+            <div class="output-header">
+              <span>LinkedIn DM Draft</span>
+              <button class="copy-btn" data-copy-target="dmBody">Copy</button>
+            </div>
+            <div class="output-field"><p id="dmBody"></p></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="ai-service.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
